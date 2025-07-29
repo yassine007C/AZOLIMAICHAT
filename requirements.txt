@@ -1,2 +1,4 @@
 openai
 streamlit
+openai @ https://pypi.perplexity.ai/simple/openai
+
