@@ -1,0 +1,13 @@
+Assistant checkpoint: Create templates/ and static/ directories, move files
+
+Assistant generated file changes:
+- templates/index.html: Update static file references
+
+---
+
+User prompt:
+
+how to craet put inside templates/ in  replit
+
+Replit-Commit-Author: Assistant
+Replit-Commit-Session-Id: e21cf7eb-f26a-4821-8eaf-8aea84b30652
