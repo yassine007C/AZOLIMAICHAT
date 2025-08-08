@@ -1,40 +1,55 @@
 import streamlit as st
-from openai import OpenAI
 
-# Set your API key and base URL
-YOUR_API_KEY = "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"
-client = OpenAI(api_key=YOUR_API_KEY, base_url="https://api.perplexity.ai")
+st.set_page_config(page_title="Popup Example", layout="centered")
 
-# Streamlit app UI
-st.set_page_config(page_title="Hema Chatbot", layout="centered")
-st.title("🤖 Chat with Hema")
+# Popup HTML with CSS
+popup_html = """
+<style>
+.popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+}
+.popup img {
+  max-width: 100%;
+}
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+}
+.button:hover {
+  background-color: #0056b3;
+}
+</style>
 
-# Text input for user message
-user_input = st.text_input("You:", placeholder="Ask me anything...")
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <img src="https://i.ibb.co/jyL6vYZ/manga.png" alt="Manga Ad">
+    <p>جميع الفصول حصريا على hmanga reader APP</p>
+    <a class="button" href="https://your-ad-link.com" target="_blank">Download</a>
+    <br><br>
+    <a href="#" onclick="document.getElementById('popup').style.display='none'; return false;">Hide</a>
+  </div>
+</div>
+"""
 
-if st.button("Send") and user_input:
-    with st.spinner("Hema is thinking..."):
-        messages = [
-            {
-                "role": "system",
-                "content": (
-                    "You are Hema, a friendly, witty, and wise AI assistant. "
-                    "Engage with the user in a warm and helpful manner."
-                ),
-            },
-            {
-                "role": "user",
-                "content": user_input
-            },
-        ]
+# Inject popup
+st.markdown(popup_html, unsafe_allow_html=True)
 
-        try:
-            response = client.chat.completions.create(
-                model="sonar-pro",
-                messages=messages,
-                stream=False
-            )
-            assistant_reply = response.choices[0].message.content
-            st.markdown(f"**Hema:** {assistant_reply}")
-        except Exception as e:
-            st.error(f"Error: {e}")
+st.write("Welcome to my Streamlit site!")
